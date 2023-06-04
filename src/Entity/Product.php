@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,14 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: CourseProduct::class)]
+    private Collection $courseProducts;
+
+    public function __construct()
+    {
+        $this->courseProducts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,6 +91,36 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CourseProduct>
+     */
+    public function getCourseProducts(): Collection
+    {
+        return $this->courseProducts;
+    }
+
+    public function addCourseProduct(CourseProduct $courseProduct): self
+    {
+        if (!$this->courseProducts->contains($courseProduct)) {
+            $this->courseProducts->add($courseProduct);
+            $courseProduct->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourseProduct(CourseProduct $courseProduct): self
+    {
+        if ($this->courseProducts->removeElement($courseProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($courseProduct->getProduct() === $this) {
+                $courseProduct->setProduct(null);
+            }
+        }
 
         return $this;
     }
