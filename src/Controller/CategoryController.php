@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
     #[Route('/categories/create', name: 'categories_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
-        $category = new Category;
+        $category = new Category();
 
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
