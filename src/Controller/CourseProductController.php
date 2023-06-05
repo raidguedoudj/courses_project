@@ -96,6 +96,7 @@ class CourseProductController extends AbstractController
             $courseProduct->setProduct($panier->getProduct());
             $courseProduct->setQuantity($panier->getQuantity());
             $em->persist($courseProduct);
+            $em->remove($panier);
             $em->flush();
         }
 
