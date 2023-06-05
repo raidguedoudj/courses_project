@@ -3,20 +3,36 @@
 {% block title %}Course{% endblock %}
 
 {% block body %}
-    <h1>Course</h1>
+    <h1>Course numéro {{course.id}}</h1>
 
     <table class="table">
-        <tbody>
+        <thead>
             <tr>
-                <th>Id</th>
-                <td>{{ course.id }}</td>
+                <th>Id produit</th>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire (#)</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for cp in coursesProducts %}
+            <tr>
+                <td>{{ cp.product.id }}</td>
+                <td>{{ cp.product.name }}</td>
+                <td>{{ cp.quantity }}</td>
+                <td>{{ cp.product.price ~ ' €' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_course_index') }}">back to list</a>
+    <a class="btn btn-info" href="{{ path('app_course_index') }}">back to list</a>
 
-    <a href="{{ path('app_course_edit', {'id': course.id}) }}">edit</a>
+    {# <a href="{{ path('app_course_edit', {'id': course.id}) }}">edit</a> #}
 
-    {{ include('course/_delete_form.html.twig') }}
+    {# {{ include('course/_delete_form.html.twig') }} #}
 {% endblock %}

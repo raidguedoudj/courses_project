@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Course index{% endblock %}
+{% block title %}Courses{% endblock %}
 
 {% block body %}
-    <h1>Course index</h1>
+    <h1>Liste des courses</h1>
 
     <table class="table">
         <thead>
@@ -21,8 +21,9 @@
                 <td>{{ course.createdAt ? course.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_course_show', {'id': course.id}) }}">show</a>
-                    <a href="{{ path('app_course_edit', {'id': course.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_course_show', {'id': course.id}) }}">show</a>
+                    {# <a href="{{ path('app_course_edit', {'id': course.id}) }}">edit</a> #}
+                    {{ include('course/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

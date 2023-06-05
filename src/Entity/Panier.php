@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PanierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
@@ -20,9 +21,11 @@ class Panier
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'paniers')]
     #[ORM\JoinColumn(name: 'product_id', referencedColumnName: 'id', nullable: false)]
+    #[Assert\NotBlank]
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?int $quantity = null;
 
     /* public function getId(): ?int

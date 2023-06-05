@@ -76,13 +76,13 @@ class PanierController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_panier_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_panier_delete', methods: ['DELETE'])]
     public function delete(Request $request, Panier $panier, PanierRepository $panierRepository): Response
     {
-        /* if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$panier->getProduct()->getId(), $request->request->get('_token'))) {
             $panierRepository->remove($panier, true);
-        } */
+        }
 
-        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_panier_new', [], Response::HTTP_SEE_OTHER);
     }
 }
