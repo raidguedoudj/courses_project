@@ -11,3 +11,6 @@ import './styles/app.scss';
 
 // loads the jquery package from node_modules
 import $ from 'jquery';
+
+// create global $ and jQuery variables
+global.$ = global.jQuery = $;

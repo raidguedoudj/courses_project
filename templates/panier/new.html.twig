@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Panier{% endblock %}
+
+{% block body %}
+    <div class="mb-5">
+        <h1>Create new Panier</h1>
+        {{ include('panier/_form.html.twig') }}
+    </div>
+
+    <div class="mt-5">
+        <h1>Mon panier</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id produit</th>
+                    <th>Nom du produit</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantity</th>
+                    <th>Prix total</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for panier in paniers %}
+                    <tr>
+                        <td>{{ panier.product.id }}</td>
+                        <td>{{ panier.product.name }}</td>
+                        <td>{{ panier.product.price ~ ' €' }}</td>
+                        <td>{{ panier.quantity }}</td>
+                        <td>{{ panier.product.price *  panier.quantity ~ ' €'}}</td>
+                        {# <td>
+                                                <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
+                                                <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
+                                            </td> #}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Panier vide pour l'instant</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{{ path('app_course_product_validate_panier') }}">Valider mon panier</a>
+    </div>
+
+    {# <a href="{{ path('app_panier_index') }}">back to list</a> #}
+{% endblock %}

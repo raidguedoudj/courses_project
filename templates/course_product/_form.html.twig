@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="text" name="panier" id="panier" value="" />
+    <button class="btn btn-primary">{{ button_label|default('Valider mes courses') }}</button>
+{{ form_end(form) }}

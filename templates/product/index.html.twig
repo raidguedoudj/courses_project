@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Products{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+    <h1>Liste de produits</h1>
 
     <table class="table">
         <thead>
@@ -11,7 +11,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th>Price (€)</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -23,7 +23,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.price ~ ' €' }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -33,11 +33,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun produit pour l'instant</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('product_create') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('product_create') }}">Ajouter un produit</a>
+    <a class="btn btn-info" href="{{ path('app_panier_new') }}">Commencer mes courses</a>
 {% endblock %}

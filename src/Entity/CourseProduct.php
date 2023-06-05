@@ -8,24 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CourseProductRepository::class)]
 class CourseProduct
 {
-    #[ORM\Id]
+    /* #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'courseProducts')]
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'prices')]
+    #[ORM\JoinColumn(name: 'customer_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    private ?\App\Entity\Customer $customer = null;
+
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Price::class)]
+    #[Groups(groups: ['Customer:read', 'CustomerPrice:read'])]
+    private ?\App\Entity\Price $price = null; */
+
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'courseProducts')]
+    #[ORM\JoinColumn(name: 'course_id', referencedColumnName: 'id')]
     private ?Course $course = null;
 
-    #[ORM\ManyToOne(inversedBy: 'courseProducts')]
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'courseProducts')]
     private ?Product $product = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
 
-    public function getId(): ?int
+    /* public function getId(): ?int
     {
         return $this->id;
-    }
+    } */
 
     public function getCourse(): ?Course
     {

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CourseProduct{% endblock %}
+
+{% block body %}
+    <pre>
+        {{ dump(myPanier) }}
+    </pre> 
+    <h1>Create new CourseProduct</h1>
+
+    {{ include('course_product/_form.html.twig') }}
+    
+
+    <a href="{{ path('app_course_product_index') }}" class"btn btn-info">back to list</a>
+    <button class="btn btn-info" onclick="addToPanier()">Ajouter à mon panier</button:b>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function addToPanier() {
+            var inputPanier = document.getElementById('panier').value = "panier";
+            if (inputPanier !== "" && inputPanier === "panier") {
+                document.course_product.submit();
+            }
+        }
+    </script>
+{% endblock %}

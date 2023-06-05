@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>CreatedAt</th>
+                <th>updatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +18,8 @@
         {% for course in courses %}
             <tr>
                 <td>{{ course.id }}</td>
+                <td>{{ course.createdAt ? course.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_course_show', {'id': course.id}) }}">show</a>
                     <a href="{{ path('app_course_edit', {'id': course.id}) }}">edit</a>
